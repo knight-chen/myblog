@@ -1,0 +1,91 @@
+<script language="javascript">
+	jQuery().ready(function(){
+		jQuery('#navigation').accordion({
+			header: '.head',
+			navigation1: true, 
+			event: 'click',
+			fillSpace: true,
+			animated: 'bounceslide'
+		});
+	});
+</script>
+<style type="text/css">
+#navigation {
+	margin:0px;
+	padding:0px;
+	width:147px;
+}
+#navigation a.head {
+	cursor:pointer;
+	background:url(__PUBLIC__/images/main_34.gif) no-repeat scroll;
+	display:block;
+	font-weight:bold;
+	margin:0px;
+	padding:5px 0 5px;
+	text-align:center;
+	font-size:12px;
+	text-decoration:none;
+}
+#navigation ul {
+	border-width:0px;
+	margin:0px;
+	padding:0px;
+	text-indent:0px;
+}
+#navigation li {
+	list-style:none; display:inline;
+}
+#navigation li li a {
+	display:block;
+	font-size:12px;
+	text-decoration: none;
+	text-align:center;
+	padding:3px;
+}
+#navigation li li a:hover {
+	background:url(__PUBLIC__/images/tab_bg.gif) repeat-x;
+        border:solid 1px #adb9c2;
+}
+</style>
+<div  style="height:500px;width: 147px;margin-left: 0;">
+  <ul id="navigation">
+      <li> <a class="head">分类管理</a>
+      <ul>
+          <li><a href="{:U('Daily/add_daily_type','','',0)}">添加日志分类</a></li>
+          <li><a href="{:U('Daily/daily_type_init','','',0)}">查看日志分类</a></li>
+      </ul>
+    </li>
+    <li> <a class="head">日志管理</a>
+      <ul>
+        <li><a href="{:U('Daily/add_daily','','',0)}" >添加日志</a></li>
+        <li><a href="{:U('Daily/daily_list','','',0)}">日志列表</a></li>
+        <li><a href="{:U('Daily/draft_list','','',0)}">草稿列表</a></li>
+      </ul>
+    </li>
+    <li> <a class="head">照片管理</a>
+      <ul>
+        <li><a href="{:U('Photo/add_photo_album','','',0)}">添加相册</a></li>
+        <li><a href="{:U('Photo/album_init','','',0)}">查看相册</a></li>
+      </ul>
+    </li>
+    <li> <a class="head">留言评论管理</a>
+      <ul>
+        <li><a href="{:U('Comment/getMessageList','','',0)}">查看/删除留言</a></li>
+        <li><a href="{:U('Comment/getCommentList','','',0)}">查看/删除评论</a></li>
+      </ul>
+    </li>
+    <!--
+    <li> <a class="head">友情链接管理</a>
+      <ul>
+        <li><a href="AddLink.php" target="rightFrame">添加友情链接</a></li>
+        <li><a href="Links.php" target="rightFrame">查看/修改友情链接</a></li>
+      </ul>
+    </li>
+    <li> <a class="head">版本信息</a>
+      <ul>
+        <li><a href="http://www.51bcw.com" target="_blank">by 51bcw.com</a></li>
+      </ul>
+    </li>
+    -->
+  </ul>
+</div>

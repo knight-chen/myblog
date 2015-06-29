@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>添加相册</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <load href="__PUBLIC__/js/jquery_1.js"/>
+        <!--<load href="__PUBLIC__/js/jquery.js"/>-->
+        <load href="__PUBLIC__/js/chili-1.7.pack.js"/>
+        <load href="__PUBLIC__/js/jquery.easing.js"/>
+        <load href="__PUBLIC__/js/jquery.dimensions.js"/>
+        <load href="__PUBLIC__/js/jquery.accordion.js"/>
+        <load href="__PUBLIC__/js/my.jquery.js"/>
+</head>
+<style>
+    *{border: 0px;margin: 0px;}
+    .right{width:1171px;height:505px;position:relative;background-color: gainsboro; }
+    .add_phtot_album{width:500px;height: 500px;position:absolute;left: 310px;border: solid #0785d1 1px;background-color: window;text-align: center;}
+    li{list-style-type: none;width: 500px; margin-top: 10px;}
+    .add_phtot_album ul{padding: 0px;position: relative;height: 375px;top:75px;}
+    .add_phtot_album li{padding: 0px;display: block;}
+    .photo_name{border: solid graytext 1px;height: 25px;width: 320px;position:absolute;left:85px;}
+    .photo_desctiption{padding:0px;border: solid graytext 1px;height:50px;width: 320px;position:absolute;top:42px;left:85px;}
+    .photo_type{border: solid graytext 1px;height:25px;position:absolute;top:107px;left: 84px;}
+    .photo_authority{border: solid graytext 1px;height:25px;position:absolute;top:143px;left: 84px;}
+    .photo_btn{position:absolute;bottom: 30px;left:85px;padding:0px;height: 40px;width:120px;background-color: rgb(173, 192, 242);font-size: 14px;font-weight: bold;letter-spacing:10px;}
+    .photo_cancel{position:absolute;bottom: 30px;right:85px;padding:0px;height: 40px;width:120px;background-color: gray;font-size: 14px;font-weight: bold;letter-spacing:10px;}
+    .message{position: absolute;top: 7px;right: 15px;font-size: 10px;}
+    .message_color{color: red;}
+</style>
+<body> 
+    <table style="margin: 0"> 
+        <tr><block name='header'><include file='Common/top'/></block></tr>
+    <tr>
+        <table border='0' cellspacing="0" cellpadding="0" padding='0' >
+            <tr>
+                <td width="8" bgcolor="#353c44">&nbsp;</td>
+                <td>
+                    <block name='left'><include file='Common/left'/></block>
+                </td>
+                <td width="10" bgcolor="#add2da">&nbsp;</td>
+                <td>
+                <block name='right'> 
+                    <div class="right">
+                        <div class="add_phtot_album">
+                            <p style="letter-spacing:5px;margin-top: 20px;"><b>新建相册基本信息</b></P>
+                            <ul>
+                                <li>
+                                    <span style="position:absolute;left:10px;top:5px;">相册名称：</span><input class="photo_name" type="text" name="" id="photo_name" placeholder="相册名称" /><span class="message"></span>
+                                </li>  
+                                 <li>
+                                     <span style="position:absolute;left:10px;top:45px;">相册描述：</span><textarea id="photo_description" class="photo_desctiption" placeholder="此相册中照片的故事"></textarea>
+                                </li>
+                                <li>
+                                    <span style="position:absolute;top:110px;left: 40px;">分类：</span>
+                                    <select id="photo_type" class="photo_type">
+                                        <foreach name="typeList" item="v" key="k">
+                                        <option value="{$v['id']}:{$v['name']}">{$v['name']}</option>
+                                        </foreach>
+                                    </select>
+                                    
+                                </li>
+                                <li>
+                                    <span style="position:absolute;top:145px;left: 10px;">相册权限：</span>
+                                    <select id="photo_authority" class="photo_authority">
+                                        <foreach name="permission" item="v" key="k">
+                                        <option value="{$v['id']}">{$v['permission']}</option>
+                                        </foreach>
+                                    </select>
+                                </li>
+                                <li>
+                                    <button id="photo_btn" disabled="disabled" class="photo_btn">确定</button>
+                                    <button id="btn_cancel" class="photo_cancel">取消</button>
+                                </li>
+                            </ul>
+                        </div> 
+                    </div>
+                </block>
+                </td>
+                    <td width="8" bgcolor="#353c44">&nbsp;
+                </td>
+            </tr>
+        </table>
+    </tr>
+</table>
+<block name='down'><include file='Common/down'/></block>
+<script>
+    $(function(){
+        $("#photo_name").blur(function(){
+            if($(this).val()===''){
+                $(".message").html("此项不能为空");
+                $(".message").addClass("message_color");
+                $("#photo_btn").attr("disabled","true")
+            }else{
+                 $(".message").html("");
+                 $(".message").removeClass("message_color");
+                 $("#photo_btn").removeAttr("disabled");
+            }
+        });
+        $("#photo_btn").click(function(){
+            var url="<?php echo U('Photo/add_photo_album','','',0);?>";
+            var album_name=$("#photo_name").val();
+            var album_description=$("#photo_description").val();
+            var album_type=$("#photo_type").val();
+            var album_authority=$("#photo_authority").val();
+            $.post(url,
+            {
+                name:album_name,
+                description:album_description,
+                typeinfo:album_type,
+                authority:album_authority
+            },function(data){
+                window.location.href = data;
+            },'json');
+        });
+    });
+</script>
+</body>
+</html>

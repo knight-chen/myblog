@@ -1,0 +1,22 @@
+/*可以在这里添加你自己的css*/
+#edui1_iframeholder{
+    height: 264px !important;
+    width: 1160px !important;
+    overflow-y:scroll;
+}
+.view img{
+    height: 120px;
+    width: 120px;
+}
+#edui1_toolbarboxouter{
+    height: 55px !important;
+}
+#edui1{
+    margin: 0;
+    padding: 0;
+    width: 1160px !important;
+    /*height: 246px;*/
+}
+.view{
+    overflow-y: scroll;
+}

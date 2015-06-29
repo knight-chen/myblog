@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div style="text-align: center;margin-top: 200px">
+            <form action="{:U('Index/register','','',0)}" method="post">
+                    输入账号：
+                    <input type="text" name="info[usernumber]" style="margin-top: 10px"><br>
+                    输入昵称：
+                    <input type="text" name="info[username]" style="margin-top: 10px"><br>
+                    输入密码：
+                    <input type="password" name="info[password1]" style="margin-top: 10px"><br>
+                    确认密码：
+                    <input type="password" name="info[password2]" style="margin-top: 10px"><br>
+                    <input type="submit" name="submit" value="提交" style="margin-top: 20px;width: 80px">
+                    <span style='margin-left: 40px;'><a href="{:U('Index/index','','',0)}" style="font-size: 8px">已有帐号...</a></span>
+            </form>
+        </div>
+    </body>
+</html>

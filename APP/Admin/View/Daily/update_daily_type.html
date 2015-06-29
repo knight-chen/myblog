@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+            var point_msg='';
+            var url="{:U('Daily/update_daily_type','','',0)}";
+            function back(url){
+                window.location=url;
+            }
+        </script>
+    <load href="__PUBLIC__/js/jquery_1.js"/>
+    <!--<load href="__PUBLIC__/js/jquery.js"/>-->
+    <load href="__PUBLIC__/js/chili-1.7.pack.js"/>
+    <load href="__PUBLIC__/js/jquery.easing.js"/>
+    <load href="__PUBLIC__/js/jquery.dimensions.js"/>
+    <load href="__PUBLIC__/js/jquery.accordion.js"/>
+    <load href="__PUBLIC__/js/my.jquery.js"/>
+    <script language="javascript">
+        jQuery().ready(function () {
+            jQuery('#navigation').accordion({
+                header: '.head',
+                navigation1: true,
+                event: 'click',
+                fillSpace: true,
+                animated: 'bounceslide'
+            });
+        });
+    </script>
+    <style>
+        .center_right{
+        width: 1185px;
+        background-color:rgb(179,210,224);
+        height: 500px;
+    }
+    .center_right div{
+        margin-left: 330px;
+    }
+    .center_right div p{
+        margin-left: 215px;
+        font-size: 16px;
+        font-weight:bolder;
+    }
+    .center_right div  ul li {
+        margin-top: 15px;
+        list-style-type: none;
+        font-size: 14px;
+        font-weight:bolder;
+    }
+    .center_right div ul li span{
+        font-size:14px;
+        font-weight:bolder;
+    }
+    .center_right div  ul li {
+        margin-top: 15px;
+        list-style-type: none;
+        font-size: 14px;
+        font-weight:bolder;
+    }
+    .center_right div ul li input {
+        width: 300px;
+        height:20px;
+        margin-left: 10px;
+    }
+    .center_right div ul li textArea {
+        width: 300px;
+        height:80px;
+        margin-left: 10px;
+    }
+    #dosubmit{
+        margin-left: 108px;
+        width: 100px;
+        height: 40px;
+    }
+    #cancel{
+        margin-left: 80px;
+        width: 100px;
+        height: 40px;
+    }
+    #name_error{
+        font-size: 4px;
+        color: red;
+    }
+    </style>
+</head>
+<body style='margin: 0'>
+    <table style="margin: 0"> 
+        <tr>
+        <block name='header'><include file='Common/top'/></block>
+    </tr>
+    <tr>
+    <table border='0' cellspacing="0" cellpadding="0" padding='0' >
+        <tr>
+            <td width="8" bgcolor="#353c44">&nbsp;</td>
+
+            <td>
+        <block name='left'><include file='Common/left'/></block>
+        </td>
+        <td width="10" bgcolor="#add2da">&nbsp;</td>
+        <td>
+        <block name='right'> 
+            <div class="center_right">
+                <table>
+                    <tr>
+                        <td>
+                            <div>
+                                <p>修改日志分类信息</p>
+                                <form action="" method="post">
+                                    <ul>
+                                        <li><span>分类名称：</span><input type="text" name='info[type_name]' id="type_name" value="{$typeInfo['type_name']}" /><span id="name_error"></span></li>
+                                        <li><span>更新时间：</span><input type="text" name='info[c_time]' value="{$c_time}" id="c_time" readonly="true"/></li>
+                                        <li><input type="hidden" name='info[id]' value="{$typeInfo['id']}" id='typeid'/></li>
+                                        <li><span>分类描述：</span><textarea rows="4" cols="22" name="info[type_descript]" id="descript">{$typeInfo['type_descript']}</textarea></li>
+                                        <li><input type="button" value="取消" id="cancel" name="cancel" onclick="back('{:U('Daily/daily_type_init','','',0)}')"/><input type="button" value="确定" id="dosubmit" name="dosubmit"/></li>
+                                        <script>
+                                            var type_init_url="{:U('Daily/daily_type_init','','',0)}";
+                                        </script>
+                                    </ul>
+                                </form>
+                            </div> 
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </block>
+        </td>
+        <td width="8" bgcolor="#353c44">&nbsp;</td>
+        </tr>
+    </table>
+</tr>
+</table>
+<block name='down'><include file='Common/down'/></block>
+</body>
+</html>

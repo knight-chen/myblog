@@ -1,0 +1,100 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>文章内容</title>
+<meta name="keywords" content="个人博客模板,博客模板,响应式" />
+<meta name="description" content="如影随形主题的个人博客模板，神秘、俏皮。" />
+<link href="__PUBLIC__/css/base.css" rel="stylesheet">
+<link href="__PUBLIC__/css/style.css" rel="stylesheet">
+<link href="__PUBLIC__/css/media.css" rel="stylesheet">
+<load href='__PUBLIC__/js/jquery.js'/>
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+<load href="__PUBLIC__/js/jquery.js"/>
+<!--[if lt IE 9]>
+<script src="js/modernizr.js"></script>
+<![endif]-->
+<script>
+    $(function(){
+        $(".a").attr("id",'');
+        $(".b").attr("id","topnav_current");
+    });
+</script>
+</head>
+<script>
+    function putComment()
+    {
+        var content = $("#comment").val();
+        var dailyId = $("#comment").data('id');
+        var url = $("#comment").data('url');
+        $.post(url,{ content : content,dailyId:dailyId },function(result){
+            if(result)
+            {
+                location.reload();
+            }
+        });
+        
+    }
+</script>
+<body>
+<div class="ibody">
+  <include file="Common/header"/>
+  <article>
+    <h2 class="about_h">您现在的位置是：<a href="/">首页</a>><a href="1/">我的文章</a>><a href="1/">文章内容</a></h2>
+    <div class="index_about">
+      <h2 class="c_titile">{$dailyContent['name']}</h2>
+      <?php $total = getCountComment($dailyContent['id']);?>
+      <p class="box_c"><span class="d_time">发布时间：{$dailyContent['c_time']}</span><span>编辑：{$dailyContent['author']}</span><span>评论（{$total}）</span></p>
+      <ul class="infos">
+        {$dailyContent['content']}
+      </ul>
+       <?php 
+            $upDaily = M("daily")->where("status = 1 and permission = 1 and id<".$dailyContent['id'])->order("id asc")->limit(1)->select();
+            $nextDaily = M("daily")->where("status = 1 and permission = 1 and id>".$dailyContent['id'])->order("id asc")->limit(1)->select();
+            $sameTypeDaily = M("daily")->where("status = 1 and permission = 1 and type=".$dailyContent['type'])->order("id asc")->limit(6)->select();
+      ?>
+      <div class="nextinfo">
+          <?php if(!empty($upDaily[0])):?>
+          <p>上一篇：<a href="{:U('Index/dailyContent',array('id'=>$upDaily[0]['id']),'',0)}">{$upDaily[0]['name']}</a></p>
+          <?php endif;?>
+          <?php if(!empty($nextDaily[0])):?>
+          <p>下一篇：<a href="{:U('Index/dailyContent',array('id'=>$nextDaily[0]['id']),'',0)}">{$nextDaily[0]['name']}</a></p>
+          <?php endif;?>
+      </div>
+      <div style='width:690px;height: 76px;position: relative;'>
+          <textarea name='comment' id='comment' data-url="{:U('Index/putComment','','',0)}" data-id="{$dailyContent['id']}" style="width: 605px;height: 75px;position: absolute;resize: none;"></textarea>
+          <input type="button" id='submit' name="submit" onclick='putComment()' value='发表评论' style='position: absolute;right:0px;font-size: 17px;width: 80px;height:76px;'>
+      </div>
+      <?php 
+        $commentList = M("daily_comment")->where("dailyid=".$dailyContent['id'])->order("c_time desc")->select();
+      ?>
+      <div class="keybq">
+          <p><span>评论列表:</span></p>
+      </div>
+      <div style="width: 600px;height: auto;">
+          <?php foreach($commentList as $k=>$v):?>
+          <ul>
+              <label style=" font-size: 12px; font-style: normal;color: #099;line-height: 30px;">评论时间:<?php echo date("Y-m-d H:i:s",$v['c_time']);?></label>
+              <li style="line-height: 20px; color: gray;font-size: 13px;">{$v['comment']}</li>
+          </ul>
+          <?php endforeach;?>
+      </div>
+     <!--
+      <div class="otherlink">
+        <h2>相关文章</h2>
+        <ul>
+            <?php foreach($sameTypeDaily as $k=>$v):?>
+            <li><a href="{:U('Index/dailyContent',array('id'=>$v['id']),'',0)}" title="{$v['name']}">{$v['name']}</a></li>
+            <?php endforeach;?>
+        </ul>
+      </div>
+     -->
+    </div>
+  </article>
+  <include file="Common/aside"/>
+  <script src="__PUBLIC__/js/silder.js"></script>
+  <div class="clear"></div>
+  <!-- 清除浮动 --> 
+</div>
+</body>
+</html>

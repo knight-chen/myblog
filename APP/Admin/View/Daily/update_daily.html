@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+            var point_msg = '';
+            var url = "{:U('Daily/update_daily_type','','',0)}";
+            function back(url) {
+                window.location = url;
+            }
+        </script>
+    <load href="__PUBLIC__/js/jquery_1.js"/>
+    <!--<load href="__PUBLIC__/js/jquery.js"/>-->
+    <load href="__PUBLIC__/js/chili-1.7.pack.js"/>
+    <load href="__PUBLIC__/js/jquery.easing.js"/>
+    <load href="__PUBLIC__/js/jquery.dimensions.js"/>
+    <load href="__PUBLIC__/js/jquery.accordion.js"/>
+    <load href="__PUBLIC__/js/my.jquery.js"/>
+    <load href="/blog/Ueditor/ueditor.config.js"/>
+    <load href="/blog/Ueditor/ueditor.all.js"/>
+    <link rel="stylesheet" href="/blog/Ueditor/themes/default/css/ueditor.css"/>
+    <link rel="stylesheet" href="/blog/Ueditor/themes/iframe.css"/>
+    <script language="javascript">
+        jQuery().ready(function () {
+            jQuery('#navigation').accordion({
+                header: '.head',
+                navigation1: true,
+                event: 'click',
+                fillSpace: true,
+                animated: 'bounceslide'
+            });
+        });
+    </script>
+    <style>
+        .center_right{
+            width: 1175px;
+            /*background-color:rgb(179,210,224);*/
+            height: 500px;
+        }
+        .center_right div p{
+            margin-left: 550px;
+            font-size: 10px;
+            font-weight:bolder;
+        }
+        #daily_name{
+            width: 1157px;
+            height: 50px;
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        li{
+            list-style-type: none;
+        }
+        #li{
+            /*margin-top: 10px;*/
+            margin-bottom: 2px;
+        }
+        #li span{
+            /*margin-left: 20px;*/
+            font-size: 14px;
+
+        }
+        #li select{
+            /*margin-left: 5px;*/
+            
+            width: 100px !important;
+            height:25px !important;
+            border: 2px;
+            border-style: groove;
+            font-size: 14px;
+
+        }
+        #c_time{
+            margin-left: 30px !important;
+        }
+        
+
+    </style>
+</head>
+<body style='margin: 0'>
+    <table style="margin: 0"> 
+        <tr>
+        <block name='header'><include file='Common/top'/></block>
+    </tr>
+    <tr>
+    <table border='0' cellspacing="0" cellpadding="0" padding='0' >
+        <tr>
+            <td width="8" bgcolor="#353c44">&nbsp;</td>
+
+            <td>
+        <block name='left'><include file='Common/left'/></block>
+        </td>
+        <td width="10" bgcolor="#add2da">&nbsp;</td>
+        <td>
+        <block name='right'> 
+            <div class="center_right">
+                <table>
+                    <tr>
+                        <td>
+                            <div>
+
+                                <form action="__SELF__" method="post" name="adddaily" id="adddaily">
+                                    <input type="text" name="daily[name]" id="daily_name" placeholder="日志标题" value="{$oldInfo['name']}"/>
+                                    <input type="hidden" id="daily_url" value="{:U('Daily/sava_to_draft')}"/>
+                                    <li style="none" id="li">
+                                        <span style="width:100px;"><b>日志类别：</b></span>
+                                        <select name='daily[type]' id='daily_type'>
+                                            <notempty name="oldInfo['type']">
+                                                <option value="{$oldInfo['typeid']}">{$oldInfo['type']}</option>
+                                            </notempty>
+                                            <foreach name="typeInfo" key="k" item="v">
+                                                <if condition="$v['id'] neq $oldInfo['typeid']">
+                                                <option value="{$v['id']}">{$v['type_name']}</option>
+                                                </if>
+                                            </foreach>
+                                        </select>
+                                        <span id='c_time' style=" margin-left: 100px !important; font-size: 14px;"><b>修改日期：</b></span><input type="text" style="height: 21px; " id="ctime" name="daily[c_time]" readonly="true" value="{:date('Y-m-d',time())}"/>
+                                        <span style=" margin-left: 100px; width:100px;"><b>权限设置：</b></span>
+                                        <select style="width: 100;height: 25px;" name='daily[permission]' id='permission'>
+                                            <notempty name="oldInfo['permission']">
+                                                <option value="{$oldInfo['permissionid']}">{$oldInfo['permission']}</option>
+                                            </notempty>
+                                            <foreach name="permission" item="v">   
+                                                <if condition="$v['id'] neq $oldInfo['permissionid']">
+                                                <option value="{$v['id']}">{$v['permission']}</option>
+                                                </if>
+                                            </foreach>
+                                        </select>
+                                        <span style='margin-left: 100px !important;font-size: 14px;'><b>原创作者：</b></span><input type='text' style="height: 21px; width: 160px; " id='author' name='daily[author]' value="{$oldInfo['author']}"/>
+                                    </li>
+                                    <input type='hidden' id='daily_content' value="{$oldInfo['content']}"/>
+                                    <script id="container" name="daily[content]" type="text/plain">
+                                    </script>
+                                    <script type="text/javascript">
+                                        var ue = UE.getEditor('container');
+                                    </script>
+                                    <li style=" margin-top: 6px;">
+                                        <input type='submit' name='dosubmit' value='修改' style="width: 66px;height: 31px;background-color:rgb(173, 210, 218) " />
+                                        <input  type="button" name="btn_cancel" id="btn_cancel" value="取消" style="width: 66px;height: 31px;background-color:azure " />
+                                        <input type="button" name="btn_preview" value="预览" style="width: 66px;height: 31px; margin-left: 870px;background-color:azure"/>
+                                    </li>
+                                </form>
+                            </div> 
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </block>
+        </td>
+        <td width="8" bgcolor="#353c44">&nbsp;</td>
+        </tr>
+    </table>
+</tr>
+</table>
+<block name='down'><include file='Common/down'/></block>
+<script language='javascript'>
+    //修改日志
+ $(function(){
+        var content =$('#daily_content').val();
+        //判断ueditor 编辑器是否创建成功
+        ue.addListener("ready", function () {
+        // editor准备好之后才可以使用
+        ue.setContent(content);
+
+        });
+    });
+</script>
+</body>
+</html>

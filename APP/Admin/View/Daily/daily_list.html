@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <style type="text/css">  
+            body{
+                margin-left: 0px;
+                margin-right: 0px;
+                margin-top: 0px;
+                margin-bottom: 0px;
+            }
+        </style>
+    </head>
+    <extend name="Index/AdminIndex"/>    
+    <body>
+        <block name="center">
+            <table style="border-spacing:0px;">
+                <tr>
+                    <td width="8" bgcolor="#353c44">&nbsp;</td>
+                    <td width="147" valign="top" style="margin-left: 0px">
+                        <!--左侧导航栏-->
+                        <include file="Common/left"/>
+                    </td>
+                    <td width="10" bgcolor="#add2da">&nbsp;</td>
+                    <td valign="top" style="margin-top: 0px;width: 1150px">
+                        <!--右侧显示页面内容-->
+                        <div width='1169px'>
+                            <table width="1170px" border="0" cellpadding="0" cellspacing="1" bgcolor="#a8c7ce">
+                                <tr>
+                                    <th width="50px" height="20" bgcolor="d3eaef" >编号</th>
+                                    <th width="100px" height="20" bgcolor="d3eaef" >名称</th>
+                                    <th width="200px" height="20" bgcolor="d3eaef">创建时间</th>
+                                    <th width="300px" height="20" bgcolor="d3eaef">日志类别</th>
+                                    <th width="200px" height="20" bgcolor="d3eaef">作者</th>
+                                    <th width="200px" height="20" bgcolor="d3eaef">权限</th>
+                                    <th width="200px" height="20" bgcolor="d3eaef">管理操作</th>
+                                </tr>
+                                <foreach name="daily_list" item="v">
+                                    <tr border="0" cellpadding="0" cellspacing="1" align="center" bgcolor="#FFFFFF">
+                                        <td id='daily_type_id'>{$v['id']}</td>
+                                        <td>{$v['name']}</td>
+                                        <td>{$v['c_time']|date='Y-m-d',###}</td>
+                                        <td>{$v['type']}</td>
+                                        <td>{$v['author']}</td>
+                                        <td>{$v['permission']}</td>
+                                        <td><a href="{:U('Daily/update_daily',array('dailyId'=>$v['id']),'',0)}">修改</a>|<a href="javascript:void(0);" onclick="delete_daily({$v['id']})" id='delete_daily'>删除</a>|<a href="{:U('Daily/show_daily',array('dailyId'=>$v['id']),'',0)}">查看</a></td>
+                                    </tr>
+                                </foreach>
+                            </table>
+                             <div style="text-align: center;margin-top: 10px;font-size: 18px;">{$pageList}</div>
+                        </div>
+                    </td>
+                    <td width="8" bgcolor="#353c44">&nbsp;</td>
+                </tr>
+            </table>
+<script>
+//删除日志
+    function delete_daily(dailyId){
+        var url="<?php echo U('Daily/delete_daily');?>";
+        $.post(
+        url,
+        {
+            dailyId:dailyId
+        },
+        function(data){
+            if(data) window.location=data;
+            else alert("你没有删除权限");
+        },'json');
+    }
+</script>
+        </block>
+    </body>
+</html>
+

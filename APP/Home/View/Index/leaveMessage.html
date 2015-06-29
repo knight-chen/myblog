@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>留言板</title>
+        <meta name="keywords" content="个人博客模板,博客模板,响应式" />
+        <meta name="description" content="如影随形主题的个人博客模板，神秘、俏皮。" />
+        <link href="__PUBLIC__/css/base.css" rel="stylesheet">
+        <link href="__PUBLIC__/css/style.css" rel="stylesheet">
+        <link href="__PUBLIC__/css/media.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+        <load href="__PUBLIC__/js/jquery.js"/>
+        <!--[if lt IE 9]>
+        <script src="js/modernizr.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div class="ibody">
+            <include file="Common/header"/>
+            <article>
+                <h2 class="about_h">您现在的位置是：<a href="{:U('Index/index','','',0)}">首页</a>><a href="{:U('Index/leaveMessage','','',0)}">留言板</a></h2>
+               <div style='width:690px;height: 76px;position: relative; left: 20px;top:-9px;'>
+                        <textarea name='' id='leaveMessage' data-url="{:U('Index/putLeaveMessage','','',0)}" style="width: 605px;height: 75px;position: absolute;resize: none;"></textarea>
+                        <input type="button" id='submit' name="submit" onclick='putLeaveMessage()' value='发表留言' style='position: absolute;right:0px;font-size: 17px;width: 80px;height:76px;'>
+                    </div>
+                <div class="bloglist">
+                    <h3 style="color: rgb(15, 156, 124);font-size: 14px;margin-left: 20px;line-height: 26px;"><b>留言记录</b></h3>
+                    <foreach name="messageList" item="v" key="k"> 
+                        <div class="newblog">
+                            <ul style="width: 615px;font-size: 14px;">
+                                <span style="color: rgb(15, 156, 124);"><b>{$k+1}:</b></span><li style="display:inline;margin-left: 10px;">{$v['content']}</li>
+                            </ul>
+                            <div class="dateview">{$v['creat_date']|date="Y-m-d",###}</div>
+                        </div>
+                    </foreach> 
+                </div>
+                <div class="page">{$pageList}</div>
+            </article>
+            <include file='Common/aside'/>
+            <script src="__PUBLIC__/js/silder.js"></script>
+            <div class="clear"></div>
+            <!-- 清除浮动 --> 
+        </div>
+        <script>
+            function putLeaveMessage()
+            {
+                var url = $("#leaveMessage").attr("data-url");
+                var content = $("#leaveMessage").val();
+                $.post(url,{content:content},function(result){
+                    if(result)
+                    {
+                        location.reload();
+                    }
+                });
+            }
+        </script>
+    </body>
+</html>

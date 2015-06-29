@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>首页</title>
+        <link href="__PUBLIC__/css/base.css" rel="stylesheet">
+        <link href="__PUBLIC__/css/index.css" rel="stylesheet">
+        <link href="__PUBLIC__/css/media.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+    </head>
+    <body>
+        <div class="ibody">
+            <header>
+                <include file="Common/header"/>
+            </header>
+            <article>
+                <include file="Common/banner"/>
+                <div class="bloglist">
+                    <h2>
+                        <p><span>推荐</span>文章</p>
+                    </h2>
+                    <foreach name="dailyList" item="v" key="k">
+                        <div class="blogs">
+                            <h3><a href="{:U('Index/dailyContent',array('id'=>$v['id']),'',0)}">{$v['name']}</a></h3>
+                            <figure><img src="__PUBLIC__/images/0{$k%4+1}.jpg" ></figure>
+                            <ul>
+                                <p>{$v['content']}</p>
+                                <a href="{:U('Index/dailyContent',array('id'=>$v['id']),'',0)}" class="readmore">阅读全文&gt;&gt;</a>
+                            </ul>
+                            <?php $total = getCountComment($v['id']);?>
+                            <p class="autor"><span>作者：{$v['author']}</span><span>分类：【<a href="/">{$v['typeName']}</a>】</span><span>评论（<a href="/"><?php echo $total;?></a>）</span></p>
+                            <div class="dateview">{$v['c_time']}</div>
+                        </div>
+                    </foreach>
+                </div>
+            </article>
+            <include file="Common/right"/>
+        </div>
+    </body>
+</html>

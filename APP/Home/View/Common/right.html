@@ -1,0 +1,60 @@
+  <aside>
+    <div class="avatar"><a href="{:U('Index/about','','',0)}"><span>关于我</span></a></div>
+    <div class="topspaceinfo">
+      <h1>完完整整来，零零碎碎去....</h1>
+      <p>回头望望，地上满满的写作愚蠢两个字...</p>
+    </div>
+    <div class="about_c">
+      <p>网名：狼慯 </p>
+      <p>职业：PHP开发工程师</p>
+      <p>籍贯：四川省达州市</p>
+      <p>电话：18127305844</p>
+      <p>邮箱：chenhailong328@qq.com</p>
+    </div>
+    <!--
+    <div class="bdsharebuttonbox"><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_more" data-cmd="more"></a></div>
+    -->
+    <div class="tj_news">
+      <h2>
+        <p class="tj_t1">最新文章</p>
+      </h2>
+        <?php  
+            $newDaily = M("daily")->where("status = 1") ->order("c_time desc") -> limit(8)->field('name,id')->select();
+        ?>
+      <ul>
+          <?php foreach($newDaily as $k=>$v):?>
+          <li><a href="{:U('Index/dailyContent',array('id'=>$v['id']),'',0)}"><?php echo $v['name']?></a></li>
+        <?php endforeach;?>
+      </ul>
+      <h2>
+        <p class="tj_t2">推荐文章</p>
+      </h2>
+         <?php  
+            $newDaily = M("daily")->where("status = 1 and is_recommend = 1") ->order("c_time desc") -> limit(8)->field('name,id')->select();
+        ?>
+      <ul>
+        <?php foreach($newDaily as $k=>$v):?>
+        <li><a href="{:U('Index/dailyContent',array('id'=>$v['id']),'',0)}"><?php echo $v['name']?></a></li>
+        <?php endforeach;?>
+      </ul>
+    </div>
+    <div class="links">
+      <h2>
+        <p>友情链接</p>
+      </h2>
+      <ul>
+        <li><a href="http://localhost/blog/index.php/Home/Index/index">陈海龙个人博客</a></li>
+        <li><a target="__blank" href="http://user.qzone.qq.com/501986411?ADUIN=991738189&ADSESSION=1432348860&ADTAG=CLIENT.QQ.5395_FriendInfo_PersonalInfo.0&ADPUBNO=26438&ptlang=2052">陈海龙QQ空间</a></li>
+      </ul>
+    </div>
+    <div class="copyright">
+      <ul>
+        <p> Made By <a href="/">Knight</a></p>
+        <p>2015年5月20日</p>
+        </p>
+      </ul>
+    </div>
+  </aside>
+   <load href="__PUBLIC__/js/silder.js"/>
+  <div class="clear"></div>
+  <!-- 清除浮动 --> 

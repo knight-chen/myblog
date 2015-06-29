@@ -1,0 +1,106 @@
+<aside>
+    <?php 
+        if($type == 1)
+        {
+            $typeList = M("daily_type")->order("c_time desc")->limit(5)->field("id,type_name")->select();
+            foreach($typeList as $k=>$v)
+            {
+                $typeList[$k]['url'] = U("Index/dailyList",array('id'=>$v['id']),'',0);
+            }
+        }
+        else
+        {
+            $typeList = M("photo_type")->limit(5)->field("id,name")->select();
+            foreach($typeList as $k=>$v)
+            {
+                $typeList[$k]['type_name'] = $v['name'];
+                $typeList[$k]['url'] = U("Index/albumList",array('id'=>$v['id']),'',0);
+            }
+        }
+    ?>
+    <div class="rnav">
+      <?php foreach($typeList as $k=>$v):?>
+      <li class="rnav<?php echo $k%4+1; ?> "><a href="<?php echo $v['url'];?>">{$v['type_name']}</a></li>
+      <?php endforeach;?>
+    </div>
+    <div class="ph_news">
+      <h2>
+        <p>点击排行</p>
+      </h2>
+        <?php 
+            if($type==1)
+            {
+                $clickRankList = M("daily")->where("status = 1 and permission = 1")->order("interview desc")->limit(9)->field("id,name")->select();
+                foreach($clickRankList as $k=>$v)
+                {
+                    $clickRankList[$k]['url'] = U("Index/dailyContent",array('id'=>$v['id']),'',0);
+                }
+            }
+            else
+            {             
+                $clickRankList = M("photo_album")->where("status = 0 and authority = 1 ")->order("c_time desc")->limit(9)->field("id,name")->select();
+                foreach($clickRankList as $k=>$v)
+                {
+                    $clickRankList[$k]['url'] = U("Index/photoList",array('id'=>$v['id']),'',0);
+                }
+            }
+        ?>
+      <ul class="ph_n">
+         <?php foreach($clickRankList as $k=>$v):?>
+         <li><?php if($k<3):?><span class="num1"><?php else:?><span><?php endif;?>{$k+1}</span><a href="{$v['url']}">{$v['name']}</a></li>
+         <?php endforeach;?>
+      </ul>
+      <h2>
+        <p>栏目推荐</p>
+      </h2>
+       <?php 
+            if($type==1)
+            {
+                $recommendList = M("daily")->where("status = 1 and permission = 1 and is_recommend=1")->order("interview desc")->limit(9)->field("id,name")->select();
+                foreach($recommendList as $k=>$v)
+                {
+                    $recommendList[$k]['url'] = U("Index/dailyContent",array('id'=>$v['id']),'',0);
+                }
+            }
+            else
+            {
+                
+                $recommendList = M("photo_album")->where("status = 0 and authority = 1 and is_recommend=1")->order("c_time desc")->limit(9)->field("id,name")->select();
+                foreach($recommendList as $k=>$v)
+                {
+                    $recommendList[$k]['url'] = U("Index/photoList",array('id'=>$v['id']),'',0);
+                }
+            }
+        ?>
+      <ul>
+         <?php foreach($recommendList as $k=>$v):?>
+        <li><a href="{$v['url']}">{$v['name']}</a></li>
+        <?php endforeach;?>
+      </ul>
+      <h2>
+        <p>最新评论</p>
+      </h2>
+        <?php 
+            $commentList = M("daily_comment") -> where("status =0")->order("c_time desc")->limit(5)->select();
+        ?>
+      <ul class="pl_n">
+         <?php foreach($commentList as $k=>$v):?>
+        <dl>
+            <dt><img src="__PUBLIC__/images//s<?php echo $k%3+1;?>.jpg"> </dt>
+          <dt></dt>
+          <dd>游客
+            <time><?php echo date("Y-m-d H:i:s",$v['c_time'])?></time>
+          </dd>
+          <dd><a href="/">{$v['comment']}</a></dd>
+        </dl>
+         <?php endforeach;?>
+      </ul>
+    </div>
+    <div class="copyright">
+      <ul>
+        <p> Design by <a href="/">DanceSmile</a></p>
+        <p>蜀ICP备11002373号-1</p>
+        </p>
+      </ul>
+    </div>
+  </aside>

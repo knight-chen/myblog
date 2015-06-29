@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>My blog</title>
+<link href="__PUBLIC__/css/base.css" rel="stylesheet">
+<link href="__PUBLIC__/css/index.css" rel="stylesheet">
+<link href="__PUBLIC__/css/media.css" rel="stylesheet">
+<load href="__PUBLIC__/js/jquery_1.js"/>
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+
+<!--[if lt IE 9]>
+<script src="js/modernizr.js"></script>
+<![endif]-->
+</head>
+<script>
+</script>
+ 
+<body>
+    <include file="Common/header"/>
+<article>
+    <include file="Common/banner"/>
+    <div class="bloglist">
+      <h2>
+        <p><span>�Ƽ�</span>����</p>
+      </h2>
+        <foreach name="dailyList" item="v" key="k">
+      <div class="blogs">
+        <h3><a href="/">{$v['name']}</a></h3>
+        <figure><img src="__PUBLIC__/images/01.jpg" ></figure>
+        <ul>
+          <p id="dailyContent">{$v['content']}</p>
+          <a href="/" target="_blank" class="readmore">�Ķ�ȫ��&gt;&gt;</a>
+        </ul>
+         
+        <p class="autor"><span>���ߣ�{$v['author']}</span><span>���ࣺ��<a href="/">{$v['typeName']}</a>��</span><span>�����<a href="/">{$v['interview']}</a>��</span><span>���ۣ�<a href="/">30</a>��</span></p>
+        <div class="dateview">{$v['c_time']}</div>
+      </div>
+        </foreach>
+    </div>
+   <include file="Common/right"/>
+</div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf8">
+<title>相册列表</title>
+<meta name="keywords" content="个人博客模板,博客模板,响应式" />
+<meta name="description" content="如影随形主题的个人博客模板，神秘、俏皮。" />
+<link href="__PUBLIC__/css/base.css" rel="stylesheet">
+<link href="__PUBLIC__/css/style.css" rel="stylesheet">
+<link href="__PUBLIC__/css/media.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+<!--[if lt IE 9]>
+<script src="js/modernizr.js"></script>
+<![endif]-->
+</head>
+<body>
+<div class="ibody">
+  <include file='Common/header'/>
+  <article>
+    <h2 class="about_h">您现在的位置是：<a href="/">首页</a>><a href="1/">图片分享</a>><a href="1/">个人相册</a></h2>
+    <div class="template">
+      <h3>
+        <p><span>个人</span>相册</p>
+        <a href="javascript:void(0);" class="more"></a> </h3>
+      <ul>
+        <foreach name='albumList' item='v' key='k'>
+            <li><a href="{:U('Index/photoList',array('id'=>$v['id']),'',0)}"><empty name="v.cover"><img src="__PUBLIC__/images/t00.jpg"><else/><img src="{$v.cover}"></empty></a><span>{$v.name}</span></li>
+        </foreach>
+      </ul>
+    <div class="page">{$pageList}</div>
+  </article>
+    <include file="Common/aside"/>
+  <script src="__PUBLIC__/js/silder.js"></script>
+  <div class="clear"></div>
+  <!-- 清除浮动 --> 
+</div>
+</body>
+</html>

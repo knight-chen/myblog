@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>我的文章列表</title>
+<meta name="keywords" content="个人博客模板,博客模板,响应式" />
+<meta name="description" content="如影随形主题的个人博客模板，神秘、俏皮。" />
+<link href="__PUBLIC__/css/base.css" rel="stylesheet">
+<link href="__PUBLIC__/css/style.css" rel="stylesheet">
+<link href="__PUBLIC__/css/media.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+
+<!--[if lt IE 9]>
+<script src="js/modernizr.js"></script>
+<![endif]-->
+</head>
+<body>
+<div class="ibody">
+ <include file="Common/header"/>
+  <article>
+    <h2 class="about_h">您现在的位置是：<a href="{:U('Index/index','','',0)}">首页</a>><a href="{:U('Index/dailyList','','',0)}">我的文章</a></h2>
+    <div class="bloglist">
+        <foreach name='dailyList' item='v' key="k">
+      <div class="newblog">
+        <ul>
+          <h3><a href="{:U('Index/dailyContent',array('id'=>$v['id']),'',0)}">{$v.name}</a></h3>
+          <?php $total = getCountComment($v['id']);?>
+          <div class="autor"><span>作者：{$v.author}</span><span>分类：[<a href="/">{$v.typeName}</a>]</span><span>评论（<a href="/">{$total}</a>）</span></div>
+          <p>{$v.content}<a href="{:U('Index/dailyContent',array('id'=>$v['id']),'',0)}" class="readmore">全文</a></p>
+        </ul>
+          <figure><img src="__PUBLIC__/images//00{$k%8+1}.jpg" ></figure>
+        <div class="dateview">{$v.c_time}</div>
+      </div>
+        </foreach>
+    </div>
+    <div class="page">
+        {$pageList} 
+    </div>
+  </article>
+ <include file="Common/aside"/>
+  <script src="__PUBLIC__/js/silder.js"></script>
+  <div class="clear"></div>
+  <!-- 清除浮动 --> 
+</div>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <block name="header">
+            <include file="Common/top"/>
+            <script>
+                var point_msg='请输入名称';
+                var url = '{:U("Daily/add_daily_type",'','',0)}';
+            </script>
+            <load href="__PUBLIC__/js/jquery_1.js"/>
+            <!--<load href="__PUBLIC__/js/jquery.js"/>-->
+            <load href="__PUBLIC__/js/chili-1.7.pack.js"/>
+            <load href="__PUBLIC__/js/jquery.easing.js"/>
+             <load href="__PUBLIC__/js/jquery.dimensions.js"/>
+            <load href="__PUBLIC__/js/jquery.accordion.js"/>
+            <load href="__PUBLIC__/js/my.jquery.js"/>
+        </block>
+    </head>
+    <script language="javascript">
+        jQuery().ready(function () {
+            jQuery('#navigation').accordion({
+                header: '.head',
+                navigation1: true,
+                event: 'click',
+                fillSpace: true,
+                animated: 'bounceslide'
+            });
+        });
+    </script>
+    <style type="text/css">
+        #navigation {
+            margin:0px;
+            padding:0px;
+            width:147px;
+        }
+        #navigation a.head {
+            cursor:pointer;
+            background:url(__PUBLIC__/images/main_34.gif) no-repeat scroll;
+            display:block;
+            font-weight:bold;
+            margin:0px;
+            padding:5px 0 5px;
+            text-align:center;
+            font-size:12px;
+            text-decoration:none;
+        }
+        #navigation ul {
+            border-width:0px;
+            margin:0px;
+            padding:0px;
+            text-indent:0px;
+        }
+        #navigation li {
+            list-style:none; display:inline;
+        }
+        #navigation li li a {
+            display:block;
+            font-size:12px;
+            text-decoration: none;
+            text-align:center;
+            padding:3px;
+        }
+        #navigation li li a:hover {
+            background:url(__PUBLIC__/images/tab_bg.gif) repeat-x;
+            border:solid 1px #adb9c2;
+        }
+    </style>
+    <body style=' margin: 0; '>
+        <block name="center">
+            <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" style='height: 500px'>
+                <tr>
+                    <td width="8" bgcolor="#353c44">&nbsp;</td>
+                    <td width="147" valign="top">
+                        <!--左侧导航栏-->
+                       <include file="Common/left"/>
+
+                    </td>
+                    <td width="10" bgcolor="#add2da">&nbsp;</td>
+                    <td valign="top">
+                        <div id="admin_right">
+                            <include file="right"/>
+                        </div>
+                    </td>
+                    <td width="10" bgcolor="#353c44">&nbsp;</td>
+                </tr>
+            </table>
+        </block>
+        <block name="footer"><include file="Common/down"/></block>  
+    </body>
+</html>
+

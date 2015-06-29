@@ -1,0 +1,88 @@
+<style type="text/css">
+    .STYLE1 {
+        color: #e1e2e3;
+        font-size: 12px;
+    }
+    .STYLE6 {color: #000000; font-size: 12; }
+    .STYLE10 {color: #000000; font-size: 12px; }
+    .STYLE19 {
+        color: #344b50;
+        font-size: 12px;
+    }
+    .STYLE21 {
+        font-size: 12px;
+        color: #3b6375;
+    }
+    .STYLE22 {
+        font-size: 12px;
+        color: #295568;
+    }
+    .center_right{
+        width: 1170px;
+        background-color:rgb(179,210,224);
+        height: 500px;
+    }
+    .center_right div{
+        margin-left: 330px;
+    }
+    .center_right div p{
+        margin-left: 215px;
+        font-size: 16px;
+        font-weight:bolder;
+    }
+    .center_right div  ul li {
+        margin-top: 15px;
+        list-style-type: none;
+        font-size: 14px;
+        font-weight:bolder;
+    }
+    .center_right div ul li span{
+        font-size:14px;
+        font-weight:bolder;
+    }
+    .center_right div  ul li {
+        margin-top: 15px;
+        list-style-type: none;
+        font-size: 14px;
+        font-weight:bolder;
+    }
+    .center_right div ul li input {
+        width: 300px;
+        height:20px;
+        margin-left: 10px;
+    }
+    .center_right div ul li textArea {
+        width: 300px;
+        height:80px;
+        margin-left: 10px;
+    }
+    #dosubmit{
+        margin-left: 166px;
+        width: 100px;
+        height: 40px;
+    }
+    #name_error{
+        font-size: 4px;
+        color: red;
+    }
+
+</style>
+<div class="center_right">
+    <table>
+        <tr>
+            <td>
+                <div>
+                    <p>创建日志分类</p>
+                    <form action="" method="post">
+                        <ul>
+                            <li><span>分类名称：</span><input type="text" name='info[type_name]' id="type_name"/><span id="name_error"></span></li>
+                            <li><span>创建时间：</span><input type="text" name='info[c_time]' value="{$time}" id="c_time" readonly="true"/></li>
+                            <li><span>分类描述：</span><textarea rows="4" cols="22" name="info[type_descript]" id="descript"></textarea></li>
+                            <li><input type="button" value="添加" id="dosubmit" name="dosubmit"/></li>
+                        </ul>
+                    </form>
+                </div> 
+            </td>
+        </tr>
+    </table>
+</div>

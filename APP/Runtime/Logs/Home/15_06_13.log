@@ -1,0 +1,24 @@
+[ 2015-06-13T09:18:23+08:00 ] 192.168.0.33 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.011385s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.057356s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.057445s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\project\blog\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php ç¬¬ 52 è¡Œ.
+NOTIC: [2] mysql_connect():  F:\project\blog\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php ç¬¬ 52 è¡Œ.
+ERR: ÓÉÓÚÄ¿±ê¼ÆËã»ú»ý¼«¾Ü¾ø£¬ÎÞ·¨Á¬½Ó¡£
+
+
+[ 2015-06-13T09:22:22+08:00 ] 192.168.0.33 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000372s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000621s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000688s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\project\blog\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php ç¬¬ 52 è¡Œ.
+NOTIC: [2] mysql_connect():  F:\project\blog\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php ç¬¬ 52 è¡Œ.
+ERR: ÓÉÓÚÄ¿±ê¼ÆËã»ú»ý¼«¾Ü¾ø£¬ÎÞ·¨Á¬½Ó¡£
+
+

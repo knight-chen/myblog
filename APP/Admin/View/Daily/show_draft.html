@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <load href="__PUBLIC__/js/jquery_1.js"/>
+    <!--<load href="__PUBLIC__/js/jquery.js"/>-->
+    <load href="__PUBLIC__/js/chili-1.7.pack.js"/>
+    <load href="__PUBLIC__/js/jquery.easing.js"/>
+    <load href="__PUBLIC__/js/jquery.dimensions.js"/>
+    <load href="__PUBLIC__/js/jquery.accordion.js"/>
+    <load href="__PUBLIC__/js/my.jquery.js"/>
+    <load href="/blog/Ueditor/ueditor.config.js"/>
+    <load href="/blog/Ueditor/ueditor.all.js"/>
+    <link rel="stylesheet" href="/blog/Ueditor/themes/default/css/ueditor.css"/>
+    <link rel="stylesheet" href="/blog/Ueditor/themes/iframe.css"/>
+    <script language="javascript">
+        jQuery().ready(function () {
+            jQuery('#navigation').accordion({
+                header: '.head',
+                navigation1: true,
+                event: 'click',
+                fillSpace: true,
+                animated: 'bounceslide'
+            });
+        });
+    </script>
+    <style>
+     .center_right{
+            width: 1175px;
+            /*background-color:rgb(179,210,224);*/
+            height: 500px;
+        } 
+        .ul{
+            width: 1100px;
+            margin: 0px;
+            padding: 0px;
+            border: 0px;
+            height: 460px;
+            margin-left: 38px;
+            margin-top: 10px;
+            border:solid 1px gainsboro;
+        }
+        li{
+            list-style-type: none;
+            /*margin-top: 10px;*/
+            height: auto;
+        }  
+        a{
+            text-decoration:none;
+        }
+        .span{
+            margin-left: 50px;
+            font-size: 14px;
+        }
+        .span_a{
+            margin-left: 565px;
+            font-size: 14px;
+        }
+        .draft_title{
+            width: 1175px;
+            height: 50px;
+            text-align: center;
+            font-family: inherit;
+            font-size: 30px;
+            border: 0px;
+        }
+        .draft_content{
+            /*width: 1175px;*/
+            height: 448px;
+            resize:none;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            font-size: 20px;
+            padding: 0px;
+            margin-left: 10px;
+        }
+           
+    </style>
+</head>
+<body style='margin: 0'>
+    <table style="margin: 0"> 
+        <tr>
+        <block name='header'><include file='Common/top'/></block>
+    </tr>
+    <tr>
+    <table border='0' cellspacing="0" cellpadding="0" padding='0' >
+        <tr>
+            <td width="8" bgcolor="#353c44">&nbsp;</td>
+
+            <td>
+        <block name='left'><include file='Common/left'/></block>
+        </td>
+        <td width="10" bgcolor="#add2da">&nbsp;</td>
+        <td>
+        <block name='right'> 
+            <div class="center_right">
+                <li style="margin-top:10px;"><span style="font-size:14px; margin-left: 38px; width: 1100px" >发布日期:{$draftInfo['c_time']|date='Y-m-d',###}</span><span class="span">类别:{$draftInfo['type_name']}</span><span class="span">权限:{$draftInfo['permission']}</span><span class="span_a"><a href="{:U('Daily/update_draft',array('draftId'=>$draftInfo['id']))}"> 修改</a></span><span style=" margin-left: 20px;"><a href="javascript:void(0);" onclick="delete_draft({$draftInfo['id']})">删除</a></span><span><a href="{:U('Daily/put_draft',array('id'=>$draftInfo['id']),'',0)}" style=" margin-left:20px;">发布</a></span></li>
+                <ul class="ul">
+                    <!--<li><input class="draft_title" type="text" readonly="treu" value="{$draftInfo['name']}"/></li>-->
+                    <li><input id='draft_con' type='hidden' value="{$draftInfo['content']}"/></li>
+                    <li style=" margin-top: 0px;">
+                        <div id='draft_content' class="draft_content"></div>
+                    </li>
+                </ul>
+            </div>
+                
+        </block>
+        </td>
+        <td width="8" bgcolor="#353c44">&nbsp;</td>
+        </tr>
+    </table>
+</tr>
+</table>
+<block name='down'><include file='Common/down'/></block>
+<script>
+ $(function(){
+     var content=$('#draft_con').val();
+//     var content="<?php echo $draftInfo['content'];?>";
+    $('#draft_content').html('<li><input class="draft_title" type="text" readonly="treu" value="{$draftInfo['name']}"/></li>');
+    $('#draft_content').append(content);
+});
+//删除日志
+    function delete_draft(draftId){
+        var url="<?php echo U('Daily/delete_draft');?>";
+        $.post(
+        url,
+        {
+            draftId:draftId
+        },
+        function(data){
+            if(data) window.location=data;
+            else alert("你没有删除权限");
+        },'json');
+    }
+</script>
+</body>
+</html>

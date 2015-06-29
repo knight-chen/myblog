@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>设置照片信息</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <load href="__PUBLIC__/js/jquery_1.js"/>
+    <!--<load href="__PUBLIC__/js/jquery.js"/>-->
+    <load href="__PUBLIC__/js/chili-1.7.pack.js"/>
+    <load href="__PUBLIC__/js/jquery.easing.js"/>
+    <load href="__PUBLIC__/js/jquery.dimensions.js"/>
+    <load href="__PUBLIC__/js/jquery.accordion.js"/>
+    <load href="__PUBLIC__/js/my.jquery.js"/>
+</head>
+<script>
+  $(function(){
+      $("#album_id").val($("#select_album").val());
+      $("#select_album").change(function(){
+          $("#album_id").val($(this).val());
+      });
+  });
+</script>
+<style>
+    *{border: 0px;margin: 0px;}
+    .right{width:1170px;height:505px;}
+    li{list-style-type: none;}
+    .select_album{height: 30px;width: 100px;border: 1px solid #ADD8E6;};
+    .photo_list_info li{}
+    .photo_list li{display: inline-block;width:350px;height:100px;margin-top:2px;margin-right:15px;position: relative;}
+    .photo_img_a{display: block;width:100px;height: 100px; text-align: center;border: 1px solid #D3D6DA;}
+    .photo_name{display: block;position: absolute;top:0px;left:110px;}
+    .photo_name_ipt{ position: absolute;left: 80px;width: 150px;height: 25px;border: 1px solid #D3D6DA;}
+    .photo_story{display: block; position: absolute;top:35px;left: 110px;}
+    .photo_story_textarea{display: block;position: absolute; left: 190px;top:35px;width: 150px;height: 50px;border: 1px solid #D3D6DA;resize: none;}
+    .photo_image{width: 80px;height: 80px;margin-top: 10px;}
+</style>
+
+<body>
+    <table style="margin: 0"> 
+        <tr><block name='header'><include file='Common/top'/></block></tr>
+    <tr>
+    <table border='0' cellspacing="0" cellpadding="0" padding='0' >
+        <tr>
+            <td width="8" bgcolor="#353c44">&nbsp;</td>
+            <td>
+        <block name='left'><include file='Common/left'/></block>
+        </td>
+        <td width="10" bgcolor="#add2da">&nbsp;</td>
+        <td>
+        <block name='right'>
+            <div class="right">
+                <ul style=" margin-bottom: 10px;">
+                    <li><span><b>相册：</b></span>
+                        <select class="select_album" id="select_album">
+                            <foreach name="album" item="v" key="k">
+                                <option value="{$v['id']}">{$v['name']}</option>
+                            </foreach>
+                        </select>
+                        
+                    </li>
+                    
+                </ul>
+                 <form method="post" action="{:U('Photo/set_photo_info')}">
+                     <input type='hidden' id='album_id' name='album_id' />
+                <ul class="photo_list">
+                    <foreach name="newPhoto" item="v" key="k">
+                        <li>
+                            <a class="photo_img_a"><img class="photo_image" src="{$v['photo_path']}"></a>
+                            <a class="photo_name"><span><b style="position: absolute;top: 4px;">名&nbsp;&nbsp;称:</b></span><input type="text" class="photo_name_ipt" id="name_{$v['id']}" name="name_{$v['id']}" placeholder="请输入照片名称"></a>
+                            <span class="photo_story"><b style="position: absolute;top: 17px;width: 90px;">相关故事:&nbsp;</b></span><input type="text" id="description_{$v['id']}" name="description_{$v['id']}}" class="photo_story_textarea">
+                        </li>
+                    </foreach>
+                    
+                </ul>
+                <input type="submit" id="setPhotoInfo" value="提交" style="width: 80px; height: 30px; background-color: rgb(65, 107, 122);color: white;font-size: 14px;margin-left: 1025px;"/>
+                </form>
+            </div>
+        </block>
+        </td>
+        <td width="8" bgcolor="#353c44">&nbsp;
+        </td>
+        </tr>
+    </table>
+    </tr>
+</table>
+<block name='down'><include file='Common/down'/></block>
+
+</body>
+</html>

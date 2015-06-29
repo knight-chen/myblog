@@ -1,0 +1,12 @@
+[ 2015-06-09T15:31:13+08:00 ] 192.168.0.26 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000050s ]
+INFO: [ app_init ] --END-- [ RunTime:0.019872s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.028938s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.029175s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\project\blog\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php ç¬¬ 52 è¡Œ.
+NOTIC: [2] mysql_connect():  F:\project\blog\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php ç¬¬ 52 è¡Œ.
+ERR: ÓÉÓÚÄ¿±ê¼ÆËã»ú»ý¼«¾Ü¾ø£¬ÎÞ·¨Á¬½Ó¡£
+
+
